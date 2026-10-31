@@ -34,6 +34,16 @@ h2{font-size:clamp(24px,4vw,32px);margin:0 0 8px;color:var(--dk)}h3{margin:0 0 6
 .band .btn{background:#fff;color:var(--bu)}.band .btn.o{background:transparent;color:#fff;border-color:#d79bb0}
 .tag{display:inline-block;background:var(--bul);color:var(--bu);border-radius:20px;padding:2px 11px;font-size:13px;margin:0 6px 10px 0;font-weight:500}
 .ph{padding:44px 0 36px;background:var(--alt);border-bottom:1px solid var(--bd)}.ph h1{font-size:clamp(28px,5vw,40px);margin:0 0 8px}.ph p{margin:0;color:var(--mu);max-width:620px;font-size:18px}
+.btn,.c,nav a{transition:transform .25s ease,box-shadow .25s ease,background-color .25s ease,color .25s ease,border-color .25s ease}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(123,30,58,.22)}.btn:active{transform:translateY(0) scale(.98)}
+nav a:hover{color:var(--bu)}
+@keyframes pf{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.pg.on{animation:pf .45s ease}
+.hero h1,.hero .lead,.hero .btn{animation:pf .7s ease both}.hero .lead{animation-delay:.1s}.hero .btn{animation-delay:.2s}
+.rv{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.rv.in{opacity:1;transform:none;transition:opacity .6s ease,transform .25s ease,box-shadow .25s ease,border-color .25s ease}
+.c:hover{transform:translateY(-4px);box-shadow:0 10px 24px rgba(90,18,41,.10);border-color:#e5c3cf}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
 ul.l{margin:10px 0 0;padding-left:18px;color:var(--mu);font-size:15px}ul.l li{margin-bottom:4px}.two{display:grid;gap:28px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));align-items:start}.p{color:var(--mu);margin:0 0 14px;max-width:680px}.k{font-weight:800;color:var(--bu);font-size:18px;margin-bottom:4px}
 footer{background:#4f1226;color:#e3bcc9;padding:32px 0;font-size:14px}footer a{color:#fff;text-decoration:none;display:inline-block;margin:0 16px 6px 0}
 </style>
@@ -60,6 +70,10 @@ document.querySelectorAll("nav a").forEach(function(a){a.classList.toggle("on",a
 window.scrollTo(0,0);
 }
 window.addEventListener("hashchange",show);show();
+var els=document.querySelectorAll(".sec .c,.sec h2,.ph h1");
+els.forEach(function(e){e.classList.add("rv")});
+function rev(){var h=window.innerHeight-40;els.forEach(function(e){if(!e.classList.contains("in")&&e.offsetParent!==null&&e.getBoundingClientRect().top<h){e.classList.add("in")}})}
+window.addEventListener("scroll",rev,{passive:true});window.addEventListener("resize",rev);window.addEventListener("hashchange",function(){setTimeout(rev,60)});setTimeout(rev,60);
 })();
 </script>
 </body>
